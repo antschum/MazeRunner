@@ -1,4 +1,4 @@
-APP_NAME=astarcppdev:1.0
+APP_NAME=astardev:1.0
 MKDIR_P = mkdir -p
 
 HOST_UID ?= $(strip $(if $(shell id -u),$(shell id -u),4000))
