@@ -90,7 +90,7 @@ class MazeDotMatrix:
 		self.numLEDs = 512
 		self.columns=16
 		self.rows=16
-		self.client = opc.Client('192.168.17.64:7890')
+		self.client = opc.Client('192.168.0.199:7890')
 		self.start_col=-1
 		self.start_row=-1
 		self.end_col=-1

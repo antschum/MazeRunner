@@ -13,7 +13,6 @@ if "MQTTSERVER" in os.environ and os.environ['MQTTSERVER']:
 else:
     mqtt_server = "127.0.0.1"
 
-
 class MazeGeneratorClient:
 
     def onConnect(self, master, obj, flags, rc):
@@ -118,21 +117,21 @@ def main(argv):
     density=50
 
     try:
-        opts, args = getopt.getopt(argv,"hi:o:w:h:c:d:",["ifile=","ofile=","width=","height=","complexity=","density="])
+        opts, args = getopt.getopt(argv,"hi:o:x:y:c:d:",["ifile=","ofile=","xpos=","ypos=","complexity=","density="])
     except getopt.GetoptError:
-        print ('MazeGeneratorClient.py -i <inputfile> -o <outputfile> -w <width> -h <height> -c <complexity> -d <density>' )
+        print ('MazeGeneratorClient.py -i <inputfile> -o <outputfile> -x <cols> -y <rows> -c <complexity> -d <density>' )
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print ('MazeGeneratorClient.py -i <inputfile> -o <outputfile> -w <width> -h <height> -c <complexity> -d <density>')
+            print ('MazeGeneratorClient.py -i <inputfile> -o <outputfile> -x <cols> -y <rows> -c <complexity> -d <density>')
             sys.exit()
         elif opt in ("-i", "--ifile"):
             inputfile = arg
         elif opt in ("-o", "--ofile"):
             outputfile = arg
-        elif opt in ("-w", "--width"):
+        elif opt in ("-x", "--cols"):
             width = arg
-        elif opt in ("-h", "--height"):
+        elif opt in ("-y", "--rows"):
             height = arg
         elif opt in ("-c", "--complexity"):
             complexity = arg

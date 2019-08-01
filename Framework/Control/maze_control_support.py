@@ -125,7 +125,7 @@ def generator_action(width,height,complexity,density):
     
     print('Generator Action')
     executeSript=os.path.join(projectDirectory,"Framework","Generator","MazeGeneratorClient.py")
-    print(['python',executeSript,'-w', width,'-h',height,'-c',complexity,'-d',density])
+    print(['python',executeSript,'-x', width,'-y',height,'-c',complexity,'-d',density])
     control.generator_action = Popen(['python',executeSript,"--width="+str(width),"--height="+str(height),"--complexity="+str(complexity),"--density="+str(density)],shell=False) # something long running
 
 def init(top, gui, *args, **kwargs):
