@@ -238,10 +238,7 @@ class MazeSolverAlgoTemplate:
             current = frontier.get()
             for next in self.getNeighbours(current[0], current[1]):
                 notFound=True
-                print(next)
                 for v in visited:
-                    print("next: {} v: {}".format(next,v))
-                    
                     if next in v:
                         notFound=False
                         break
@@ -250,6 +247,7 @@ class MazeSolverAlgoTemplate:
                     visited.append([next, current])        
          
         print(visited)
+        return visited
         
 
     # Command for starting the solving procedure
