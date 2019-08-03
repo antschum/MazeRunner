@@ -160,20 +160,20 @@ class MazeSolverAlgoTemplate:
         
 
         if self.isInGrid(row, column) == False:
-            print("not in grid")
+            
             return neighbors
         if self.grid[row][column] == OBSTACLE:
-            print("OBISTICAL")
+            
             return neighbors
         if self.isInGrid(top[0], top[1]) == True and self.grid[top[0]] [top[1]] != OBSTACLE:
             neighbors.append(top)
         if self.isInGrid(bottom[0], bottom[1]) == True and self.grid[bottom[0]] [bottom[1]] != OBSTACLE:
-            print("bottom")
+            
             neighbors.append(bottom)
         if self.isInGrid(left[0], left[1]) ==True and self.grid[left[0]][left[1]] != OBSTACLE:
             neighbors.append(left)
         if self.isInGrid(right[0],right[1]) == True and self.grid[right[0]] [right[1]] != OBSTACLE:
-            print("right")
+            
             neighbors.append(right)
 
         
@@ -213,7 +213,21 @@ class MazeSolverAlgoTemplate:
     def generateResultPath(self,came_from):
         # TODO: this is you job now :-)
         # HINT: this method is a bit tricky as you have to invert the came_from list (follow the path from end to start)
-        pass
+        
+        
+        search=(self.setEndRow,self.setEndCol)
+        path=[]
+        while search != (self.setStartRow, self.setStartCol):
+            for x in came_from:
+                print(x[0]==search)
+                if x[0] == search:
+                    path.insert(0, search)
+                    search=x[1]
+                    break
+        path.insert(0, (self.setStartRow,self.setStartCol))       
+        print(path)
+        return path
+
 
 
     #############################
@@ -230,7 +244,7 @@ class MazeSolverAlgoTemplate:
         frontier.put(start)
  
         visited = [] ## ersten 2 werte sind coordinaten, zweiten 2 werte sind came from
-        #visited.append([start, None])
+        visited.append([start, start])
 
 
         while not frontier.empty():
@@ -247,7 +261,8 @@ class MazeSolverAlgoTemplate:
                     visited.append([next, current])        
          
         print(visited)
-        return visited
+        
+        return self.generateResultPath(visited)
         
 
     # Command for starting the solving procedure
@@ -271,12 +286,14 @@ if __name__ == '__main__':
     # HINT: in case you want to develop the solver without MQTT messages and without always
     #       loading new different mazes --> just load any maze you would like from a file
 
-    mg.loadMaze("..\\MazeExamples\\Maze1.txt")
+    mg.loadMaze("..\\..\\MazeExamples\\Maze1.txt")
     mg.printMaze()
     neighbours = mg.getNeighbours(0,0)
 
+    
     myList=[1,(1,2), (1,2,3)]
     test=(1,2)
+    print(myList[1]==test)
     if test in myList:
         print("test in List")
 
