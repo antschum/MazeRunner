@@ -153,10 +153,10 @@ class MazeSolverAlgoTemplate:
         # TODO: Add a Unit Test Case --> Very good example for boundary tests and condition coverage
         neighbors = []
 
-        top=[row+1, column]
-        bottom=[row-1, column]
-        left=[row, column-1]
-        right=[row, column+1]
+        top=(row+1, column)
+        bottom=(row-1, column)
+        left=(row, column-1)
+        right=(row, column+1)
         
 
         if self.isInGrid(row, column) == False:
@@ -215,18 +215,55 @@ class MazeSolverAlgoTemplate:
         # HINT: this method is a bit tricky as you have to invert the came_from list (follow the path from end to start)
         pass
 
+
     #############################
     # Definition of Maze solver algorithm
     #
     # implementation taken from https://www.redblobgames.com/pathfinding/a-star/introduction.html
     #############################
+    
     def myMazeSolver(self):
         # TODO: this is you job now :-)
-        pass
+        print("this is the solver method")
+        start = (self.setStartRow, self.setStartCol)
+        frontier=queue.Queue()
+        frontier.put(start)
+ 
+        visited = [] ## ersten 2 werte sind coordinaten, zweiten 2 werte sind came from
+        #visited.append([start, None])
+
+
+        while not frontier.empty():
+            
+            current = frontier.get()
+            for next in self.getNeighbours(current[0], current[1]):
+                notFound=True
+                print(next)
+                for v in visited:
+                    print("next: {} v: {}".format(next,v))
+                    
+                    if next in v:
+                        notFound=False
+                        break
+                if notFound:
+                    frontier.put(next)
+                    visited.append([next, current])        
+         
+        print(visited)
+        
 
     # Command for starting the solving procedure
     def solveMaze(self):
+        
+        
+
+
         return self.myMazeSolver()
+
+
+##BREADTH FIRST traversal
+ 
+
 
 
 if __name__ == '__main__':
@@ -236,14 +273,23 @@ if __name__ == '__main__':
     # HINT: in case you want to develop the solver without MQTT messages and without always
     #       loading new different mazes --> just load any maze you would like from a file
 
-    mg.loadMaze("..\\..\\MazeExamples\\Maze1.txt")
+    mg.loadMaze("..\\MazeExamples\\Maze1.txt")
     mg.printMaze()
     neighbours = mg.getNeighbours(0,0)
+
+    myList=[1,(1,2), (1,2,3)]
+    test=(1,2)
+    if test in myList:
+        print("test in List")
+
+    print("list done")
 
     print(neighbours)
     print(mg.gridElementToString(1,2))
 
     print(mg.isSameGridElement([0,1],[0,3]))
+
+    mg.myMazeSolver()
     #solutionString = mg.solveMaze()
     #print(solutionString)
    
